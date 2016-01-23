@@ -21,8 +21,6 @@
     "gulp-csso": "latest",
     "gulp-less": "latest",
     "gulp-csscomb": "latest",
-    "gulp-cssbeautify": "latest",
-    "gulp-autoprefixer": "latest",
-    "css-mqpacker": "latest"
+    "gulp-autoprefixer": "latest"
   }
 }

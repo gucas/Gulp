@@ -14,24 +14,16 @@ var destinationPathJS  = destinationPath + './JS/';
 
 
 // STYLES
-// gulp.task('buildCSS', function () {
-//   return gulp.src(sourcePathCSS + '*.less')
-//     .pipe(plugins.less())
-//     .pipe(plugins.csscomb())
-//     .pipe(plugins.cssbeautify({indent: '  '}))
-//     .pipe(plugins.autoprefixer())
-//     .pipe(plugins.csso())
-//     .pipe(plugins.rename({
-//       suffix: '.min'
-//     }))
-//     .pipe(gulp.dest(destinationPathCSS));
-// });
-
-gulp.task('css', function () {
-    var postcss = require('gulp-postcss');
-    return gulp.src(sourcePathCSS + '*.less')
-        .pipe( postcss([ require('autoprefixer') )
-        .pipe( gulp.dest(destinationPathCSS) );
+gulp.task('buildCSS', function () {
+  return gulp.src(sourcePathCSS + '*.less')
+    .pipe(plugins.less())
+    .pipe(plugins.csscomb())
+    .pipe(plugins.autoprefixer())
+    .pipe(plugins.csso())
+    .pipe(plugins.rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest(destinationPathCSS));
 });
 
 // Tâche par défaut
