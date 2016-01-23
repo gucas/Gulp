@@ -1,26 +1,18 @@
 {
-  "name": "TaskRunnerProject",
-  "version": "0.0.1",
-  "main": "gulpfile.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://gucas@github.com/gucas/Gulp.git"
-  },
-  "author": "GuCas",
-  "bugs": {
-    "url": "https://github.com/gucas/Gulp/issues"
-  },
-  "homepage": "https://github.com/gucas/Gulp#readme",
-  "devDependencies": {
-    "gulp": "latest",
-    "gulp-load-plugins": "latest",
-    "gulp-rename": "latest",
-    "gulp-csso": "latest",
-    "gulp-less": "latest",
-    "gulp-csscomb": "latest",
-    "gulp-autoprefixer": "latest"
-  }
+    "name": "TaskRunnerProject",
+    "version": "0.0.1",
+    "main": "gulpfile.js",
+    "author": "GuCas",
+    "homepage": "https://github.com/gucas",
+    "devDependencies": {
+        "gulp"              : "latest",
+        "gulp-load-plugins" : "latest",
+        "gulp-less"         : "latest",
+        "gulp-csscomb"      : "latest",
+        "gulp-uncss"        : "latest",
+        "gulp-autoprefixer" : "latest",
+        "gulp-csso"         : "latest",
+        "gulp-rename"       : "latest",
+        "gulp-htmlmin"      : "latest"
+    }
 }
