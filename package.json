@@ -1,11 +1,28 @@
 {
-  "name": "project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "TaskRunnerProject",
+  "version": "0.0.1",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://gucas@github.com/gucas/Gulp.git"
+  },
+  "author": "GuCas",
+  "bugs": {
+    "url": "https://github.com/gucas/Gulp/issues"
+  },
+  "homepage": "https://github.com/gucas/Gulp#readme",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-rename": "latest",
+    "gulp-csso": "latest",
+    "gulp-less": "latest",
+    "gulp-csscomb": "latest",
+    "gulp-cssbeautify": "latest",
+    "gulp-autoprefixer": "latest",
+    "css-mqpacker": "latest"
+  }
 }
