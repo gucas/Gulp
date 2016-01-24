@@ -12,6 +12,7 @@
         "gulp-less"                  : "latest",
         "gulp-pixrem"                : "latest",
         "gulp-combine-media-queries" : "latest",
+        "gulp-combine-mq" : "latest",
         "gulp-scss"                  : "latest",
         "gulp-csscomb"               : "latest",
         "gulp-cssbeautify"           : "latest",

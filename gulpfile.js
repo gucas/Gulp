@@ -41,9 +41,18 @@ var onError = {
         this.emit('end');
     }
 };
+
+
+var combineMq = 'gulp-combine-mq';
 // ================================
 // ================================
 // ================================
+
+
+
+
+
+
 
 
 
@@ -75,9 +84,6 @@ gulp.task('buildCSS', function () {
         // Parse CSS and add vendor prefixes.
         .pipe(plugins.autoprefixer())
 
-        // Combine matching media queries into one.
-        .pipe(plugins.combine-media-queries())
-
         // To write external source map files.
         .pipe(plugins.sourcemaps.write('../css/'))
 
@@ -89,6 +95,11 @@ gulp.task('optimCSS', function () {
 
         // Prevent pipe breaking caused by errors from gulp plugins.
         .pipe(plugins.plumber(onError))
+
+        // Combine matching media queries into one.
+        .pipe(plugins.combineMq({
+            beautify : false
+        }))
 
         // Remove unused CSS.
         .pipe(plugins.uncss({
