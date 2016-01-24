@@ -443,14 +443,6 @@ textarea
 {
     resize: vertical;
 }
-@media screen and (min-width: 200px) and (max-width: 640px)
-{
-    .bloc
-    {
-        display: block;
-        clear: both;
-    }
-}
 .hidden
 {
     display: none !important;

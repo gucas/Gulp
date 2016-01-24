@@ -130,15 +130,6 @@ gulp.task('buildHTML', function() {
         // Prevent pipe breaking caused by errors from gulp plugins.
         .pipe(plugins.plumber(onError))
 
-        // Extracts & inlines critical-path (above-the-fold) CSS from HTML.
-        .pipe(plugins.critical({
-            base   : prod,
-            inline : true,
-            width  : 320,
-            height : 480,
-            minify : true
-        }))
-
         // Minify HTML.
         .pipe(plugins.htmlmin({
             removeComments              : true,
@@ -147,6 +138,16 @@ gulp.task('buildHTML', function() {
             collapseInlineTagWhitespace : true,
             removeEmptyAttributes       : true
         }))
+
+        // Extracts & inlines critical-path (above-the-fold) CSS from HTML.
+        // .pipe(plugins.critical({
+        //     inline : true,
+        //     width  : 320,
+        //     height : 480,
+        //     minify : true
+        // }))
+
+
 
     .pipe(gulp.dest(destinationPath))
 });
@@ -218,7 +219,7 @@ gulp.task('default', ['buildCSS']);
 // ================================
 // === PROD =======================
 // ================================
-gulp.task('prod', ['buildCSS', 'optimCSS']);
+gulp.task('prod', ['buildCSS', 'optimCSS', 'buildHTML']);
 // ================================
 // ================================
 // ================================
