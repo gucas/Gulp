@@ -124,7 +124,7 @@ gulp.task('optimCSS', function () {
 // === HTML ======================
 // ================================
 // ================================
-gulp.task('buildHTML', function() {
+gulp.task('optimHTML', function() {
     return gulp.src(sourcePath + '*.html')
 
         // Prevent pipe breaking caused by errors from gulp plugins.
@@ -213,13 +213,13 @@ gulp.task('watch', function () {
     gulp.watch(sourcePath + '*.html', ['html']);
 });
 // ================================
-// === PREPROD ====================
+// === DEV ========================
 // ================================
 gulp.task('default', ['buildCSS']);
 // ================================
 // === PROD =======================
 // ================================
-gulp.task('prod', ['buildCSS', 'optimCSS', 'buildHTML']);
+gulp.task('prod', ['buildCSS', 'optimCSS', 'optimHTML']);
 // ================================
 // ================================
 // ================================
