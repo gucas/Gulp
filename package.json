@@ -1,10 +1,10 @@
 {
-    "name"     : "TaskRunnerProject",
-    "version"  : "0.0.1",
-    "main"     : "gulpfile.js",
-    "author"   : "GuCas",
-    "homepage" : "https://github.com/gucas",
-    "devDependencies": {
+    "name"            : "TaskRunnerProject",
+    "version"         : "0.0.1",
+    "main"            : "gulpfile.js",
+    "author"          : "GuCas",
+    "homepage"        : "https://github.com/gucas",
+    "devDependencies" : {
         "gulp"              : "latest",
         "gulp-load-plugins" : "latest",
         "gulp-plumber"      : "latest",
