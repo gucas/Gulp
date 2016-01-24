@@ -1,13 +1,14 @@
-
-// === STATER =====================
+// ================================
+// ================================
+// ================================
+// ================================
+// === START ======================
 // ================================
 // ================================
 var gulp = require('gulp');
 // ================================
 // ================================
 // ================================
-
-
 
 // === LOAD ALL PACKAGE.JSON PLUGIN
 // ================================
@@ -17,13 +18,12 @@ var plugins = require('gulp-load-plugins')();
 // ================================
 // ================================
 
-
-
-// === VARIABLE ===================
+// === VARIABLES ==================
 // ================================
 // ================================
 var sourcePath         = './Projet/src/';
-var sourcePathCSS      =  sourcePath + './css/less/';
+var sourcePathCSS      =  sourcePath + './css/';
+var sourcePathLESS     =  sourcePath + './css/less/';
 var sourcePathJS       =  sourcePath + './js/';
 var sourcePathImg      =  sourcePath + './img/';
 
@@ -31,69 +31,78 @@ var destinationPath    = './Projet/build/';
 var destinationPathCSS = destinationPath + './css/';
 var destinationPathJS  = destinationPath + './js/';
 var destinationPathImg = destinationPath + './img/';
+
+
+// Tâche de gestion des erreurs à la volée
+var onError = {
+    errorHandler: function (err) {
+        $.util.beep();
+        console.log(err);
+        this.emit('end');
+    }
+};
 // ================================
 // ================================
 // ================================
 
 
-// const imagemin = require('gulp-imagemin');
-// const pngquant = require('imagemin-pngquant');
 
 // === STYLES =====================
 // ================================
 // ================================
 gulp.task('buildCSS', function () {
-    return gulp.src(sourcePathCSS + '*.less')
+    return gulp.src(sourcePathLESS + '*.less')
+
         // Prevent pipe breaking caused by errors from gulp plugins.
         .pipe(plugins.plumber(onError))
 
+        // Source map support.
         .pipe(plugins.sourcemaps.init())
 
         // Compile LESS file.
         .pipe(plugins.less())
 
+        // Generates pixel fallbacks for rem units.
+        .pipe(plugins.pixrem({
+            rootValue : '10px'
+            // browsers  : 'last 2 versions'
+        }))
+
         // Makes your code beautiful.
         .pipe(plugins.csscomb())
         .pipe(plugins.cssbeautify())
 
-        // Remove unused CSS.
-        .pipe(plugins.uncss({
-            html: [sourcePath + '*.html']
-        }))
-
         // Parse CSS and add vendor prefixes.
         .pipe(plugins.autoprefixer())
+
+        // Combine matching media queries into one.
+        .pipe(plugins.combine-media-queries())
+
+        // To write external source map files.
+        .pipe(plugins.sourcemaps.write('../css/'))
+
+    .pipe(gulp.dest(sourcePathCSS));
+});
+
+gulp.task('optimCSS', function () {
+    return gulp.src(sourcePathCSS + '*.css')
+
+        // Prevent pipe breaking caused by errors from gulp plugins.
+        .pipe(plugins.plumber(onError))
+
+        // Remove unused CSS.
+        .pipe(plugins.uncss({
+            html : [sourcePath + '*.html']
+        }))
 
         // CSS minimizer unlike others.
         .pipe(plugins.csso())
 
-
-        .pipe(plugins..sourcemaps.write(destinationPathCSS.maps))
-
-
         .pipe(plugins.rename({
-            suffix: '.min'
+            suffix : '.min'
         }))
+
     .pipe(gulp.dest(destinationPathCSS));
-});
-// ================================
-// ================================
-// ================================
-
-
-// Tâche "critical" = critical inline CSS
-gulp.task('prodCSS', function() {
-    return  gulp.src(sourcePath + '*.html')
-
-    // Extracts & inlines critical-path (above-the-fold) CSS from HTML
-    .pipe(plugins.critical({
-        base   : prod,
-        inline : true,
-        width  : 320,
-        height : 480,
-        minify : true
-    }))
-    .pipe(gulp.dest(destinationPath));
 });
 // ================================
 // ================================
@@ -104,15 +113,30 @@ gulp.task('prodCSS', function() {
 // === HTML ======================
 // ================================
 // ================================
-gulp.task('mini', function() {
-  return gulp.src(sourcePath + '*.html')
-    .pipe(plugins.htmlmin({
-        removeComments              : true,
-        collapseWhitespace          : true,
-        conservativeCollapse        : true,
-        collapseInlineTagWhitespace : true,
-        removeEmptyAttributes       : true,
-    }))
+gulp.task('buildHTML', function() {
+    return gulp.src(sourcePath + '*.html')
+
+        // Prevent pipe breaking caused by errors from gulp plugins.
+        .pipe(plugins.plumber(onError))
+
+        // Extracts & inlines critical-path (above-the-fold) CSS from HTML.
+        .pipe(plugins.critical({
+            base   : prod,
+            inline : true,
+            width  : 320,
+            height : 480,
+            minify : true
+        }))
+
+        // Minify HTML.
+        .pipe(plugins.htmlmin({
+            removeComments              : true,
+            collapseWhitespace          : true,
+            conservativeCollapse        : true,
+            collapseInlineTagWhitespace : true,
+            removeEmptyAttributes       : true
+        }))
+
     .pipe(gulp.dest(destinationPath))
 });
 // ================================
@@ -125,9 +149,15 @@ gulp.task('mini', function() {
 // ================================
 // ================================
 gulp.task('buildJS', function() {
-  return gulp.src(sourcePathJS + '*.js')
-    .pipe(plugins.uglify())
-    .pipe(plugins.concat('script.min.js'))
+    return gulp.src(sourcePathJS + '*.js')
+
+        // Prevent pipe breaking caused by errors from gulp plugins.
+        .pipe(plugins.plumber(onError))
+
+        .pipe(plugins.uglify())
+
+        .pipe(plugins.concat('script.min.js'))
+
     .pipe(gulp.dest(destinationPathJS));
 });
 // ================================
@@ -139,14 +169,19 @@ gulp.task('buildJS', function() {
 // === IMAGES OPTIMISATION ========
 // ================================
 // ================================
-gulp.task('optimImg', function () {
+gulp.task('buildImg', function () {
     return gulp.src(sourcePathImg + '*.{png,jpg,jpeg,gif,svg}')
+
+        // Prevent pipe breaking caused by errors from gulp plugins.
+        .pipe(plugins.plumber(onError))
+
         .pipe(plugins.imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [plugins.imagemin-pngquant()]
         }))
-        .pipe(gulp.dest(destinationPathImg));
+
+    .pipe(gulp.dest(destinationPathImg));
 });
 // ================================
 // ================================
@@ -159,11 +194,10 @@ gulp.task('optimImg', function () {
 
 // === MAIN TASK LAUNCHER =========
 // ================================
-// ================================
 // === WATCH ======================
 // ================================
 gulp.task('watch', function () {
-    gulp.watch(sourcePathCSS + '*.less', ['css']);
+    gulp.watch(sourcePathLESS + '*.less', ['css']);
     gulp.watch(sourcePath + '*.html', ['html']);
 });
 // ================================
@@ -173,7 +207,9 @@ gulp.task('default', ['buildCSS']);
 // ================================
 // === PROD =======================
 // ================================
-gulp.task('default', ['buildCSS']);
+gulp.task('prod', ['buildCSS', 'optimCSS']);
+// ================================
+// ================================
 // ================================
 // ================================
 // ================================
