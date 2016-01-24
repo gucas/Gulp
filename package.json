@@ -7,12 +7,14 @@
     "devDependencies": {
         "gulp"              : "latest",
         "gulp-load-plugins" : "latest",
+        "gulp-plumber"      : "latest",
         "gulp-less"         : "latest",
         "gulp-csscomb"      : "latest",
         "gulp-uncss"        : "latest",
         "gulp-autoprefixer" : "latest",
         "gulp-csso"         : "latest",
         "gulp-rename"       : "latest",
+        "gulp-sourcemaps"   : "latest",
         "gulp-htmlmin"      : "latest"
     }
 }

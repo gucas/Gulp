@@ -44,12 +44,17 @@ var destinationPathImg = destinationPath + './img/';
 // ================================
 gulp.task('buildCSS', function () {
     return gulp.src(sourcePathCSS + '*.less')
+        // Prevent pipe breaking caused by errors from gulp plugins.
+        .pipe(plugins.plumber(onError))
+
+        .pipe(plugins.sourcemaps.init())
 
         // Compile LESS file.
         .pipe(plugins.less())
 
         // Makes your code beautiful.
         .pipe(plugins.csscomb())
+        .pipe(plugins.cssbeautify())
 
         // Remove unused CSS.
         .pipe(plugins.uncss({
@@ -61,6 +66,10 @@ gulp.task('buildCSS', function () {
 
         // CSS minimizer unlike others.
         .pipe(plugins.csso())
+
+
+        .pipe(plugins..sourcemaps.write(destinationPathCSS.maps))
+
 
         .pipe(plugins.rename({
             suffix: '.min'
