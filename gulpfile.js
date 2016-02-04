@@ -33,6 +33,20 @@ var destinationPathJS  = destinationPath + './js/';
 var destinationPathImg = destinationPath + './img/';
 
 
+// var paths = {
+//     sourcePath         : " ./Projet/src/' "
+//     sourcePathCSS      : " sourcePath + './css/' "
+//     sourcePathLESS     : " sourcePath + './css/less/' "
+//     sourcePathJS       : " sourcePath + './js/' "
+//     sourcePathImg      : " sourcePath + './img/' "
+
+//     destinationPath    : "./Projet/build/' "
+//     destinationPathCSS : " destinationPath + './css/' "
+//     destinationPathJS  : " destinationPath + './js/' "
+//     destinationPathImg : " destinationPath + './img/' "
+// };
+
+
 // Tâche de gestion des erreurs à la volée
 var onError = {
     errorHandler: function (err) {
