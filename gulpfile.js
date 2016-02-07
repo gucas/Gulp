@@ -33,18 +33,24 @@ var destinationPathJS  = destinationPath + './js/';
 var destinationPathImg = destinationPath + './img/';
 
 
-// var paths = {
-//     sourcePath         : " ./Projet/src/' "
-//     sourcePathCSS      : " sourcePath + './css/' "
-//     sourcePathLESS     : " sourcePath + './css/less/' "
-//     sourcePathJS       : " sourcePath + './js/' "
-//     sourcePathImg      : " sourcePath + './img/' "
+var paths = {
+    sourcePath         : " ./Projet/src/' ",
+    sourcePathCSS      : " sourcePath + './css/' "
+    sourcePathLESS     : " sourcePath + './css/less/' "
+    sourcePathJS       : " sourcePath + './js/' "
+    sourcePathImg      : " sourcePath + './img/' "
 
-//     destinationPath    : "./Projet/build/' "
-//     destinationPathCSS : " destinationPath + './css/' "
-//     destinationPathJS  : " destinationPath + './js/' "
-//     destinationPathImg : " destinationPath + './img/' "
-// };
+    destinationPath    : "./Projet/build/' "
+    destinationPathCSS : " destinationPath + './css/' "
+    destinationPathJS  : " destinationPath + './js/' "
+    destinationPathImg : " destinationPath + './img/' "
+};
+
+
+//Prevent pipe breaking, log and notify using gulp-plumber and node-notifier
+var plumberNotifier = require('gulp-plumber-notifier');
+
+
 
 
 // Tâche de gestion des erreurs à la volée
